@@ -1,43 +1,42 @@
 package main
 
 import (
-  "github.com/urfave/cli"
-  "os"
-  "fmt"
-  "sort"
-  "github.com/AlexsJones/warpcore/core"
+	"fmt"
+	"github.com/AlexsJones/warpcore/core"
+	"github.com/urfave/cli"
+	"os"
+	"sort"
 )
 
 func main() {
 
-  _ = core.NewContext()
+	_ = core.NewContext()
 
-  app := cli.NewApp()
-  app.Name = "Warpcore"
+	app := cli.NewApp()
+	app.Name = "Warpcore"
 
-  app.Commands = []cli.Command{
-    {
-      Name:    "inspect",
-      Aliases: []string{"i"},
-      Usage:   "Inspect terraform",
-      Action:  func(c *cli.Context) error {
-        fmt.Println("...")
-        return nil
-      },
-    },
-    {
-      Name:    "engage",
-      Aliases: []string{"e"},
-      Usage:   "Test terraform deployment",
-      Action:  func(c *cli.Context) error {
+	app.Commands = []cli.Command{
+		{
+			Name:    "inspect",
+			Aliases: []string{"i"},
+			Usage:   "Inspect terraform",
+			Action: func(c *cli.Context) error {
+				fmt.Println("...")
+				return nil
+			},
+		},
+		{
+			Name:    "engage",
+			Aliases: []string{"e"},
+			Usage:   "Test terraform deployment",
+			Action: func(c *cli.Context) error {
 
+				return nil
+			},
+		},
+	}
 
-        return nil
-      },
-    },
-  }
+	sort.Sort(cli.CommandsByName(app.Commands))
 
- sort.Sort(cli.CommandsByName(app.Commands))
-
- app.Run(os.Args)
+	app.Run(os.Args)
 }
