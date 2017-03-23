@@ -18,6 +18,12 @@ func NewContext() *context {
         panic(err)
     }
     exPath := path.Dir(ex)
+
   log.Println("Starting here ", exPath)
+
+  files := SearchFiles(".tf")
+
+  log.Println(files)
+
   return &context{ exPath }
 }
