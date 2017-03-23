@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-  context := core.NewContext()
+  _ = core.NewContext()
 
   app := cli.NewApp()
   app.Name = "Warpcore"
@@ -30,7 +30,8 @@ func main() {
       Aliases: []string{"e"},
       Usage:   "Test terraform deployment",
       Action:  func(c *cli.Context) error {
-        fmt.Println("...")
+
+
         return nil
       },
     },

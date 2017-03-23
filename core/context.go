@@ -1,8 +1,23 @@
 package core
 
-type context struct {}
+import (
+    "os"
+    "log"
+    "path"
+)
+
+type context struct {
+
+  Cwd string
+}
 
 func NewContext() *context {
 
-  return &context{}
+  ex, err := os.Executable()
+    if err != nil {
+        panic(err)
+    }
+    exPath := path.Dir(ex)
+  log.Println("Starting here ", exPath)
+  return &context{ exPath }
 }
