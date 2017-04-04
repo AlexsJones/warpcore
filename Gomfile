@@ -1,2 +1,3 @@
-gom 'github.com/AlexsJones/warpcore', :commit => '719253211f5204ee3441a72a9ab21dd85be3a735'
-gom 'github.com/urfave/cli', :commit => '9e5b04886c4bfee2ceba1465b8121057355c4e53'
+gom 'github.com/AlexsJones/warpcore'
+gom 'github.com/urfave/cli'
+gom 'github.com/hashicorp/hcl/hcl/parser'
