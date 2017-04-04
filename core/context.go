@@ -1,29 +1,31 @@
 package core
 
 import (
-    "os"
-    "log"
-    "path"
+	"log"
+	"os"
+	"path"
 )
 
-type context struct {
-
-  Cwd string
+//Context data structure
+type Context struct {
+	Cwd string
 }
 
-func NewContext() *context {
+//NewContext entrypoint
+func NewContext(filepath string) *Context {
 
-  ex, err := os.Executable()
-    if err != nil {
-        panic(err)
-    }
-    exPath := path.Dir(ex)
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
 
-  log.Println("Starting here ", exPath)
+	exPath := path.Dir(ex)
 
-  files := SearchFiles(".tf")
+	files := SearchFiles(filepath, ".warp")
 
-  log.Println(files)
+	log.Println(files)
 
-  return &context{ exPath }
+	_, err = ParseFiles(files)
+
+	return &Context{exPath}
 }

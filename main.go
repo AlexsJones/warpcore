@@ -2,41 +2,53 @@ package main
 
 import (
 	"fmt"
-	"github.com/AlexsJones/warpcore/core"
-	"github.com/urfave/cli"
+	"log"
 	"os"
 	"sort"
+
+	"github.com/AlexsJones/warpcore/core"
+	"github.com/urfave/cli"
 )
 
 func main() {
 
-	_ = core.NewContext()
-
 	app := cli.NewApp()
 	app.Name = "Warpcore"
 
-	app.Commands = []cli.Command{
-		{
-			Name:    "inspect",
-			Aliases: []string{"i"},
-			Usage:   "Inspect terraform",
-			Action: func(c *cli.Context) error {
-				fmt.Println("...")
-				return nil
-			},
-		},
-		{
-			Name:    "engage",
-			Aliases: []string{"e"},
-			Usage:   "Test terraform deployment",
-			Action: func(c *cli.Context) error {
+	var provider string
+	var filepath string
 
-				return nil
-			},
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:        "provider",
+			Usage:       "providers supported: aws|google",
+			Destination: &provider,
+		},
+		cli.StringFlag{
+			Name:        "path",
+			Usage:       "filepath for gtf files",
+			Destination: &filepath,
 		},
 	}
 
+	app.Action = func(c *cli.Context) error {
+		if c.String("provider") == "aws" {
+			log.Println("Initalising aws provider")
+		} else if c.String("provider") == "google" {
+			log.Println("Initalising google cloud provider")
+		} else if len(c.String("provider")) == 0 {
+			fmt.Println("Please set a provider e.g. aws")
+			os.Exit(1)
+		} else if len(c.String("provider")) >= 0 {
+			fmt.Println("Unsupported provider")
+			os.Exit(1)
+		}
+		return nil
+	}
 	sort.Sort(cli.CommandsByName(app.Commands))
-
 	app.Run(os.Args)
+
+	fmt.Println("Using filepath:" + filepath)
+
+	_ = core.NewContext(filepath)
 }

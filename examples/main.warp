@@ -1,0 +1,7 @@
+resource "instance" "my_instance" {
+
+}
+
+resource "subnet" "my_subnet" {
+  cidr_block = "10.0.128.0/0"
+}
