@@ -1,3 +1,6 @@
 gom 'github.com/AlexsJones/warpcore'
 gom 'github.com/urfave/cli'
 gom 'github.com/hashicorp/hcl/hcl/parser'
+gom 'github.com/hashicorp/hil/ast'
+gom 'github.com/mitchellh/mapstructure'
+gom 'github.com/mitchellh/reflectwalk'
